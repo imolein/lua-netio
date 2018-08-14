@@ -5,7 +5,7 @@ local netio
 describe('lua-netio\'s #privat functions', function()
   setup(function()
     _G._TEST = true
-    netio = require('netio')
+    netio = require('netio.json')
   end)
 
   teardown(function()

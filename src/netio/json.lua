@@ -6,23 +6,27 @@ local requests = require('requests')
 --local xml = require('xml2lua')
 
 
--- Private stuff
+-- private functions
 
+-- builds the requests url
+-- returns formated like this: scheme://url(:port)/netio.json
 local function _build_url(url, port)
   if url:sub(-1) == '/' then
     url = url:sub(1, -2)
   end
-  
-  
+
   if port then
     url = url .. ':' .. port
   end
-  
+
   return url .. '/netio.json'
 end
 
+-- returns a table with the correct format to work
+-- with the NETIO API
 local function _build_outputs_tbl(ids, action, delay)
   local outputs = {}
+
   if type(ids) == 'table' and action then
     for k, v in ipairs(ids) do
       outputs[k] = { ID = v, Action = action, Delay = delay and delay * 1000 }
@@ -38,6 +42,8 @@ local function _build_outputs_tbl(ids, action, delay)
   return outputs  
 end
 
+-- makes the request with lua-requests library and do some error
+-- handling
 local function _api_request(self, method, data)
   local resp, err
   local ok, resp_obj = pcall(requests[method:lower()], {
@@ -60,7 +66,7 @@ local function _api_request(self, method, data)
   elseif status == 500 then
     return nil, 'Internal server error'
   end
-  
+
   resp, err = resp_obj.json()
   if not resp then
     return nil, 'Couldn\'t parse response as JSON'
@@ -70,26 +76,9 @@ local function _api_request(self, method, data)
 end
 
 
--- Public stuff
+-- privat methods
 
--- Netio class
 local Netio = {}
-
-function netio.new(opts)
-  if not opts.url then return nil, 'URL required!' end
-  
-  local auth
-  if opts.user and opts.passwd then
-    auth = requests.HTTPBasicAuth(opts.user, opts.passwd)
-  end
-
-  local o = {
-    url = _build_url(opts.url, opts.port),
-    auth = auth,
-  }
-
-  return setmetatable(o, { __index = Netio })
-end
 
 function Netio:info()
   return _api_request(self, 'GET')
@@ -109,25 +98,26 @@ end
 
 function Netio:measure_info()
   local info = self:info()
-  
-  if info.Agent.Model ~= 'NETIO 4All' then
+
+  if not info.GlobalMeasure then
     return nil, 'Metering are only available on NETIO Model "NETIO 4All".' ..
                 ' Your model is: ' .. info.Agent.Model
-  else
-    return info.GlobalMeasure
   end
+  
+  return info.GlobalMeasure
 end
 
 function Netio:output_action(ids, action, delay)
   local actions = { off = 0, on = 1, soff = 2, son = 3,
                     toggle = 4, no_change = 5, ignore = 6 }
   local outputs
+
   if action and type(action) == string then
     outputs = _build_outputs_tbl(ids, actions[action], delay)
   else
     outputs = _build_outputs_tbl(ids, tonumber(action), delay)
   end
-
+  --print(inspect(outputs))
   return _api_request(self, 'POST', { Outputs = outputs })
 end
 
@@ -139,8 +129,38 @@ function Netio:output_on(ids)
   return self:output_action(ids, 1)
 end
 
+function Netio:output_shortoff(ids, delay)
+  return self:output_action(ids, 2, delay)
+end
+
+function Netio:output_shorton(ids, delay)
+  return self:output_action(ids, 3, delay)
+end
+
 function Netio:output_toggle(ids)
   return self:output_action(ids, 4)
+end
+
+function Netio:output_nochange(ids)
+  return self:output_action(ids, 5)
+end
+
+-- privat methods
+
+function netio.new(opts)
+  if not opts.url then return nil, 'URL required!' end
+
+  local auth
+  if opts.user and opts.passwd then
+    auth = requests.HTTPBasicAuth(opts.user, opts.passwd)
+  end
+
+  local o = {
+    url = _build_url(opts.url, opts.port),
+    auth = auth,
+  }
+
+  return setmetatable(o, { __index = Netio })
 end
 
 -- For tests
