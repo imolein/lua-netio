@@ -16,14 +16,14 @@ describe('lua-netio\'s #privat functions', function()
       local url = 'http://netio-4.netio-products.com'
       local expected = 'http://netio-4.netio-products.com/netio.json'
 
-      assert.are.equals(expected, netio._build_url(url))
+      assert.are.same(expected, netio._build_url(url))
     end)
 
     it('- is build correctly if URL have ending /', function()
       local url = 'http://netio-4.netio-products.com/'
       local expected = 'http://netio-4.netio-products.com/netio.json'
 
-      assert.are.equals(expected, netio._build_url(url))
+      assert.are.same(expected, netio._build_url(url))
     end)
 
     it('- is build correctly if URL have ending / and port as parameter', function()
@@ -31,7 +31,7 @@ describe('lua-netio\'s #privat functions', function()
       local port = 8080
       local expected = 'http://netio-4.netio-products.com:8080/netio.json'
 
-      assert.are.equals(expected, netio._build_url(url, port))
+      assert.are.same(expected, netio._build_url(url, port))
     end)
   end)
 

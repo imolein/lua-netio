@@ -1,10 +1,11 @@
 package.path = package.path .. ';./?/init.lua'
 
-local netio, n1, sleep
+local netio, n1, sleep, inspect
 
 describe('lua-netio #json module', function()
   setup(function()
     netio = require('netio.json')
+    inspect = require('inspect')
     sleep = function(n)
         os.execute("sleep " .. tonumber(n))
       end
@@ -12,15 +13,24 @@ describe('lua-netio #json module', function()
 
   teardown(function()
     netio = nil
+    
   end)
 
   before_each(function()
+    -- Some test might fail, because the NETIO 4ALL sporadically rejects
+    -- some requests. This rejects are not detectable because the NETIO
+    -- respond with valid static information but no error at all.
+    -- You can see it rejected, only by looking in the NETIO's log file.
     n1 = netio.new({
-      url = 'http://netio-4.netio-products.com/',
+      url = 'http://netio-4all.netio-products.com',
+      --url = 'http://netio-4.netio-products.com',
       port = 8080,
       user = 'write',
       passwd = 'demo'
     })
+  end)
+
+  after_each(function()
     local resp = n1:output_on({ 1, 2, 3, 4 })
   end)
 
@@ -49,6 +59,13 @@ describe('lua-netio #json module', function()
     
     assert.are.same(all_outputs[1]['ID'], output1.ID)
     assert.are.same(all_outputs[2]['ID'], output2.ID)
+  end)
+
+  it('- measure_info API call', function()
+    local measure = n1:measure_info()
+    
+    assert.is.not_nil(measure.Voltage)
+    assert.is.not_nil(measure.Frequency)
   end)
 
   it('- output_off API call with single id', function()
@@ -84,7 +101,7 @@ describe('lua-netio #json module', function()
   it('- output_toggle API call with single id', function()
     local before = n1:output_info(1)
     local toggle = n1:output_toggle(1)
-    
+            print(inspect(toggle))
     assert.are.not_same(before['State'], toggle.Outputs[1]['State'])
   end)
 
@@ -93,6 +110,7 @@ describe('lua-netio #json module', function()
     local before1 = response[1]
     local before2 = response[2]
     local toggle = n1:output_toggle({1, 2})
+    print(inspect(toggle))
     
     assert.are.not_same(before1['State'], toggle.Outputs[1]['State'])
     assert.are.not_same(before2['State'], toggle.Outputs[2]['State'])
