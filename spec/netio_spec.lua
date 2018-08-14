@@ -1,11 +1,10 @@
 package.path = package.path .. ';./?/init.lua'
 
-local netio, n1, sleep, inspect
+local netio, n1, sleep
 
 describe('lua-netio #json module', function()
   setup(function()
     netio = require('netio.json')
-    inspect = require('inspect')
     sleep = function(n)
         os.execute("sleep " .. tonumber(n))
       end
@@ -13,7 +12,6 @@ describe('lua-netio #json module', function()
 
   teardown(function()
     netio = nil
-    
   end)
 
   before_each(function()
@@ -36,7 +34,7 @@ describe('lua-netio #json module', function()
 
   it('- info API call', function()
     local response = n1:info()
-    
+
     assert.is.not_nil(response.Agent)
     assert.is.not_nil(response.Outputs)
   end)
@@ -56,14 +54,14 @@ describe('lua-netio #json module', function()
     local all_outputs = n1:output_info()
     local output1 = n1:output_info(1)
     local output2 = n1:output_info(2)
-    
+
     assert.are.same(all_outputs[1]['ID'], output1.ID)
     assert.are.same(all_outputs[2]['ID'], output2.ID)
   end)
 
   it('- measure_info API call', function()
     local measure = n1:measure_info()
-    
+
     assert.is.not_nil(measure.Voltage)
     assert.is.not_nil(measure.Frequency)
   end)
@@ -71,14 +69,14 @@ describe('lua-netio #json module', function()
   it('- output_off API call with single id', function()
     local response = n1:output_off(1)
     local expected = 0
-    
+
     assert.are.same(expected, response.Outputs[1]['State'])
   end)
 
   it('- output_off API call with multiple id\'s', function()
     local response = n1:output_off({ 1, 2 })
     local expected = 0
-    
+
     assert.are.same(expected, response.Outputs[1]['State'])
     assert.are.same(expected, response.Outputs[2]['State'])
   end)
@@ -86,14 +84,14 @@ describe('lua-netio #json module', function()
   it('- output_on API call with single id', function()
     local response = n1:output_on(1)
     local expected = 1
-    
+
     assert.are.same(expected, response.Outputs[1]['State'])
   end)
 
   it('- output_on API call with multiple id\'s', function()
     local response = n1:output_on({ 1, 2 })
     local expected = 1
-    
+
     assert.are.same(expected, response.Outputs[1]['State'])
     assert.are.same(expected, response.Outputs[2]['State'])
   end)
@@ -101,7 +99,7 @@ describe('lua-netio #json module', function()
   it('- output_toggle API call with single id', function()
     local before = n1:output_info(1)
     local toggle = n1:output_toggle(1)
-            print(inspect(toggle))
+
     assert.are.not_same(before['State'], toggle.Outputs[1]['State'])
   end)
 
@@ -110,8 +108,7 @@ describe('lua-netio #json module', function()
     local before1 = response[1]
     local before2 = response[2]
     local toggle = n1:output_toggle({1, 2})
-    print(inspect(toggle))
-    
+
     assert.are.not_same(before1['State'], toggle.Outputs[1]['State'])
     assert.are.not_same(before2['State'], toggle.Outputs[2]['State'])
   end)
@@ -120,7 +117,7 @@ describe('lua-netio #json module', function()
     local response = n1:output_shortoff(1, 2)
     local expected1 = 0
     local expected2 = 1
-    
+
     assert.are.same(expected1, response.Outputs[1]['State'])
     sleep(3)
     response = n1:info()
@@ -131,7 +128,7 @@ describe('lua-netio #json module', function()
     local response = n1:output_shortoff({ 1, 2 }, 2)
     local expected1 = 0
     local expected2 = 1
-    
+
     assert.are.same(expected1, response.Outputs[1]['State'])
     assert.are.same(expected1, response.Outputs[2]['State'])
     sleep(3)
@@ -145,7 +142,7 @@ describe('lua-netio #json module', function()
     response = n1:output_shorton(1, 2)
     local expected1 = 1
     local expected2 = 0
-    
+
     assert.are.same(expected1, response.Outputs[1]['State'])
     sleep(3)
     response = n1:info()
@@ -157,7 +154,7 @@ describe('lua-netio #json module', function()
     response = n1:output_shorton({ 1, 2 }, 2)
     local expected1 = 1
     local expected2 = 0
-    
+
     assert.are.same(expected1, response.Outputs[1]['State'])
     assert.are.same(expected1, response.Outputs[2]['State'])
     sleep(3)
