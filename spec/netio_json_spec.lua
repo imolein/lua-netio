@@ -24,12 +24,12 @@ describe('lua-netio #json module', function()
       --url = 'http://netio-4.netio-products.com',
       port = 8080,
       user = 'write',
-      passwd = 'demo'
+      pass = 'demo'
     })
   end)
 
   after_each(function()
-    local resp = n1:output_on({ 1, 2, 3, 4 })
+    local resp = n1:outputs_on({ 1, 2, 3, 4 })
   end)
 
   it('- info API call', function()
@@ -51,7 +51,7 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_info API call', function()
-    local all_outputs = n1:output_info()
+    local all_outputs = n1:outputs_info()
     local output1 = n1:output_info(1)
     local output2 = n1:output_info(2)
 
@@ -67,14 +67,14 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_off API call with single id', function()
-    local response = n1:output_off(1)
+    local response = n1:outputs_off(1)
     local expected = 0
 
     assert.are.same(expected, response.Outputs[1]['State'])
   end)
 
   it('- output_off API call with multiple id\'s', function()
-    local response = n1:output_off({ 1, 2 })
+    local response = n1:outputs_off({ 1, 2 })
     local expected = 0
 
     assert.are.same(expected, response.Outputs[1]['State'])
@@ -82,14 +82,14 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_on API call with single id', function()
-    local response = n1:output_on(1)
+    local response = n1:outputs_on(1)
     local expected = 1
 
     assert.are.same(expected, response.Outputs[1]['State'])
   end)
 
   it('- output_on API call with multiple id\'s', function()
-    local response = n1:output_on({ 1, 2 })
+    local response = n1:outputs_on({ 1, 2 })
     local expected = 1
 
     assert.are.same(expected, response.Outputs[1]['State'])
@@ -97,24 +97,24 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_toggle API call with single id', function()
-    local before = n1:output_info(1)
-    local toggle = n1:output_toggle(1)
+    local before = n1:outputs_info(1)
+    local toggle = n1:outputs_toggle(1)
 
     assert.are.not_same(before['State'], toggle.Outputs[1]['State'])
   end)
 
   it('- output_toggle API call with multiple id\'s', function()
-    local response = n1:output_info()
+    local response = n1:outputs_info()
     local before1 = response[1]
     local before2 = response[2]
-    local toggle = n1:output_toggle({1, 2})
+    local toggle = n1:outputs_toggle({1, 2})
 
     assert.are.not_same(before1['State'], toggle.Outputs[1]['State'])
     assert.are.not_same(before2['State'], toggle.Outputs[2]['State'])
   end)
 
   it('- output_shortoff API call with single id and 2s delay', function()
-    local response = n1:output_shortoff(1, 2)
+    local response = n1:outputs_shortoff(1, 2)
     local expected1 = 0
     local expected2 = 1
 
@@ -125,7 +125,7 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_shortoff API call with multiple id\'s and 2s delay', function()
-    local response = n1:output_shortoff({ 1, 2 }, 2)
+    local response = n1:outputs_shortoff({ 1, 2 }, 2)
     local expected1 = 0
     local expected2 = 1
 
@@ -138,8 +138,8 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_shorton API call with single id and 2s delay', function()
-    local response = n1:output_off(1)
-    response = n1:output_shorton(1, 2)
+    local response = n1:outputs_off(1)
+    response = n1:outputs_shorton(1, 2)
     local expected1 = 1
     local expected2 = 0
 
@@ -150,8 +150,8 @@ describe('lua-netio #json module', function()
   end)
 
   it('- output_shorton API call with multiple id\'s and 2s delay', function()
-    local response = n1:output_off({ 1, 2 })
-    response = n1:output_shorton({ 1, 2 }, 2)
+    local response = n1:outputs_off({ 1, 2 })
+    response = n1:outputs_shorton({ 1, 2 }, 2)
     local expected1 = 1
     local expected2 = 0
 
@@ -164,5 +164,3 @@ describe('lua-netio #json module', function()
   end)
 
 end)
-
-
