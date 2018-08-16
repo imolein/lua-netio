@@ -50,10 +50,10 @@ describe('lua-netio #json module', function()
     assert.are.same(expected_noutputs, response.NumOutputs)
   end)
 
-  it('- output_info API call', function()
+  it('- outputs_info API call', function()
     local all_outputs = n1:outputs_info()
-    local output1 = n1:output_info(1)
-    local output2 = n1:output_info(2)
+    local output1 = n1:outputs_info(1)
+    local output2 = n1:outputs_info(2)
 
     assert.are.same(all_outputs[1]['ID'], output1.ID)
     assert.are.same(all_outputs[2]['ID'], output2.ID)
@@ -66,101 +66,101 @@ describe('lua-netio #json module', function()
     assert.is.not_nil(measure.Frequency)
   end)
 
-  it('- output_off API call with single id', function()
+  it('- outputs_off API call with single id', function()
     local response = n1:outputs_off(1)
     local expected = 0
 
-    assert.are.same(expected, response.Outputs[1]['State'])
+    assert.are.same(expected, response[1]['State'])
   end)
 
-  it('- output_off API call with multiple id\'s', function()
+  it('- outputs_off API call with multiple id\'s', function()
     local response = n1:outputs_off({ 1, 2 })
     local expected = 0
 
-    assert.are.same(expected, response.Outputs[1]['State'])
-    assert.are.same(expected, response.Outputs[2]['State'])
+    assert.are.same(expected, response[1]['State'])
+    assert.are.same(expected, response[2]['State'])
   end)
 
-  it('- output_on API call with single id', function()
+  it('- outputs_on API call with single id', function()
     local response = n1:outputs_on(1)
     local expected = 1
 
-    assert.are.same(expected, response.Outputs[1]['State'])
+    assert.are.same(expected, response[1]['State'])
   end)
 
-  it('- output_on API call with multiple id\'s', function()
+  it('- outputs_on API call with multiple id\'s', function()
     local response = n1:outputs_on({ 1, 2 })
     local expected = 1
 
-    assert.are.same(expected, response.Outputs[1]['State'])
-    assert.are.same(expected, response.Outputs[2]['State'])
+    assert.are.same(expected, response[1]['State'])
+    assert.are.same(expected, response[2]['State'])
   end)
 
-  it('- output_toggle API call with single id', function()
+  it('- outputs_toggle API call with single id', function()
     local before = n1:outputs_info(1)
     local toggle = n1:outputs_toggle(1)
 
-    assert.are.not_same(before['State'], toggle.Outputs[1]['State'])
+    assert.are.not_same(before['State'], toggle[1]['State'])
   end)
 
-  it('- output_toggle API call with multiple id\'s', function()
+  it('- outputs_toggle API call with multiple id\'s', function()
     local response = n1:outputs_info()
     local before1 = response[1]
     local before2 = response[2]
     local toggle = n1:outputs_toggle({1, 2})
 
-    assert.are.not_same(before1['State'], toggle.Outputs[1]['State'])
-    assert.are.not_same(before2['State'], toggle.Outputs[2]['State'])
+    assert.are.not_same(before1['State'], toggle[1]['State'])
+    assert.are.not_same(before2['State'], toggle[2]['State'])
   end)
 
-  it('- output_shortoff API call with single id and 2s delay', function()
+  it('- outputs_shortoff API call with single id and 2s delay', function()
     local response = n1:outputs_shortoff(1, 2)
     local expected1 = 0
     local expected2 = 1
 
-    assert.are.same(expected1, response.Outputs[1]['State'])
+    assert.are.same(expected1, response[1]['State'])
     sleep(3)
-    response = n1:info()
-    assert.are.same(expected2, response.Outputs[1]['State'])
+    response = n1:outputs_info()
+    assert.are.same(expected2, response[1]['State'])
   end)
 
-  it('- output_shortoff API call with multiple id\'s and 2s delay', function()
+  it('- outputs_shortoff API call with multiple id\'s and 2s delay', function()
     local response = n1:outputs_shortoff({ 1, 2 }, 2)
     local expected1 = 0
     local expected2 = 1
 
-    assert.are.same(expected1, response.Outputs[1]['State'])
-    assert.are.same(expected1, response.Outputs[2]['State'])
+    assert.are.same(expected1, response[1]['State'])
+    assert.are.same(expected1, response[2]['State'])
     sleep(3)
-    response = n1:info()
-    assert.are.same(expected2, response.Outputs[1]['State'])
-    assert.are.same(expected2, response.Outputs[2]['State'])
+    response = n1:outputs_info()
+    assert.are.same(expected2, response[1]['State'])
+    assert.are.same(expected2, response[2]['State'])
   end)
 
-  it('- output_shorton API call with single id and 2s delay', function()
+  it('- outputs_shorton API call with single id and 2s delay', function()
     local response = n1:outputs_off(1)
     response = n1:outputs_shorton(1, 2)
     local expected1 = 1
     local expected2 = 0
 
-    assert.are.same(expected1, response.Outputs[1]['State'])
+    assert.are.same(expected1, response[1]['State'])
     sleep(3)
-    response = n1:info()
-    assert.are.same(expected2, response.Outputs[1]['State'])
+    response = n1:outputs_info()
+    assert.are.same(expected2, response[1]['State'])
   end)
 
-  it('- output_shorton API call with multiple id\'s and 2s delay', function()
+  it('- outputs_shorton API call with multiple id\'s and 2s delay', function()
     local response = n1:outputs_off({ 1, 2 })
     response = n1:outputs_shorton({ 1, 2 }, 2)
     local expected1 = 1
     local expected2 = 0
 
-    assert.are.same(expected1, response.Outputs[1]['State'])
-    assert.are.same(expected1, response.Outputs[2]['State'])
+    assert.are.same(expected1, response[1]['State'])
+    assert.are.same(expected1, response[2]['State'])
     sleep(3)
-    response = n1:info()
-    assert.are.same(expected2, response.Outputs[1]['State'])
-    assert.are.same(expected2, response.Outputs[2]['State'])
+    response = n1:outputs_info()
+    assert.are.same(expected2, response[1]['State'])
+    assert.are.same(expected2, response[2]['State'])
   end)
 
 end)
