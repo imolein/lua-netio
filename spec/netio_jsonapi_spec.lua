@@ -4,7 +4,7 @@ local netio, n1, sleep
 
 describe('lua-netio #json module', function()
   setup(function()
-    netio = require('netio.json')
+    netio = require('netio.jsonapi')
     sleep = function(n)
         os.execute("sleep " .. tonumber(n))
       end
