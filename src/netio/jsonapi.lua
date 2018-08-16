@@ -135,7 +135,7 @@ end
 --- Get output informations
 -- about a specific or all outputs (method)
 -- @function instance:outputs_info
--- @int id Output ID
+-- @int[opt] id Output ID
 -- @treturn ?table|nil [Outputs table](../manual/dstructures.md.html#Ouputs_table)
 -- @treturn ?nil|string error message
 -- @usage local outputs = netio1:output_info()
