@@ -191,7 +191,7 @@ end
 -- @treturn ?nil|string error message
 -- @usage local info = netio1:output_off(1)
 function NetioJson:outputs_off(ids)
-  return self:output_action(ids, 0)
+  return self:outputs_action(ids, 0)
 end
 
 --- Switch outputs on (method)
@@ -202,7 +202,7 @@ end
 -- @treturn ?nil|string error message
 -- @usage local info = netio1:output_on(1)
 function NetioJson:outputs_on(ids)
-  return self:output_action(ids, 1)
+  return self:outputs_action(ids, 1)
 end
 
 --- Switch outputs off for a specific timeframe (method)
@@ -214,7 +214,7 @@ end
 -- @treturn ?nil|string error message
 -- @usage local info = netio1:output_shortoff(1)
 function NetioJson:outputs_shortoff(ids, delay)
-  return self:output_action(ids, 2, delay)
+  return self:outputs_action(ids, 2, delay)
 end
 
 --- Switch outputs on for a specific timeframe (method)
@@ -226,7 +226,7 @@ end
 -- @treturn ?nil|string error message
 -- @usage local info = netio1:output_shorton(1)
 function NetioJson:outputs_shorton(ids, delay)
-  return self:output_action(ids, 3, delay)
+  return self:outputs_action(ids, 3, delay)
 end
 
 --- Invert the outputs state (method)
@@ -237,7 +237,7 @@ end
 -- @treturn ?nil|string error message
 -- @usage local info = netio1:output_toggle(1)
 function NetioJson:outputs_toggle(ids)
-  return self:output_action(ids, 4)
+  return self:outputs_action(ids, 4)
 end
 
 -- Public functions
