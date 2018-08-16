@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-netio-api documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-netio-api</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Status_table">Status table </a></li>
+<li><a href="#Agent_table">Agent table </a></li>
+<li><a href="#GlobalMeasure_table">GlobalMeasure table </a></li>
+<li><a href="#Ouputs_table">Ouputs table </a></li>
+</ul>
+
+
+<h2>Data structures</h2>
+<ul class="nowrap">
+  <li><strong>Returend data structures</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/netio.jsonapi.html">netio.jsonapi</a></li>
+  <li><a href="../modules/netio.telnet.html">netio.telnet</a></li>
+  <li><a href="../modules/netio.urlapi.html">netio.urlapi</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>Returend data structures</h1>
+
+<p><a name="Status_table"></a></p>
+<h2>Status table</h2>
+
+<p>The <strong>Status</strong> table is returned by the <strong>info()</strong> method and contains all
+informations which the API provides.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code> {
+   Agent = {
+     DeviceName = "NETIO 4ALL Demo",
+     JSONVer = "2.1",
+     Model = "NETIO 4All",
+     NumOutputs = 4,
+     OemID = 0,
+     SerialNumber = "24:A4:2C:39:11:5A",
+     Time = "2018-08-15T18:44:28+01:00",
+     Uptime = 490866,
+     VendorID = 0,
+     Version = "3.1.0"
+   },
+   GlobalMeasure = {
+     EnergyStart = "2018-01-19T13:30:26+00:00",
+     Frequency = 50.1,
+     OverallPowerFactor = 0,
+     TotalCurrent = 0,
+     TotalEnergy = 2253,
+     TotalLoad = 0,
+     Voltage = 239.1
+   },
+   Outputs = { {
+       Action = 6,
+       Current = 0,
+       Delay = 5000,
+       Energy = 0,
+       ID = 1,
+       Load = 0,
+       Name = "output_1",
+       PowerFactor = 0,
+       State = 1
+     }, {
+       Action = 6,
+       Current = 0,
+       Delay = 5000,
+       Energy = 0,
+       ID = 2,
+       Load = 0,
+       Name = "output_2",
+       PowerFactor = 0,
+       State = 1
+     }, {
+       Action = 6,
+       Current = 0,
+       Delay = 5000,
+       Energy = 2081,
+       ID = 3,
+       Load = 0,
+       Name = "output_3",
+       PowerFactor = 0,
+       State = 0
+     }, {
+       Action = 6,
+       Current = 0,
+       Delay = 5000,
+       Energy = 172,
+       ID = 4,
+       Load = 0,
+       Name = "output_4",
+       PowerFactor = 0,
+       State = 1
+     } }
+ }
+</code></pre>
+
+
+<p><a name="Agent_table"></a></p>
+<h2>Agent table</h2>
+
+<p>The <strong>Agent</strong> table is returned by the <strong>general_info()</strong> method and contains the
+<strong>Agent</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code> {
+     DeviceName = "NETIO 4ALL Demo",
+     JSONVer = "2.1",
+     Model = "NETIO 4All",
+     NumOutputs = 4,
+     OemID = 0,
+     SerialNumber = "24:A4:2C:39:11:5A",
+     Time = "2018-08-15T18:44:28+01:00",
+     Uptime = 490866,
+     VendorID = 0,
+     Version = "3.1.0"
+ }
+</code></pre>
+
+
+<p><a name="GlobalMeasure_table"></a></p>
+<h2>GlobalMeasure table</h2>
+
+<p>The <strong>GlobalMeasure</strong> table is returned by the <strong>measure_info()</strong> method and contains the
+<strong>GlobalMeasure</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code> {
+   EnergyStart = "2018-01-19T13:30:26+00:00",
+   Frequency = 50.1,
+   OverallPowerFactor = 0,
+   TotalCurrent = 0,
+   TotalEnergy = 2253,
+   TotalLoad = 0,
+   Voltage = 239.1
+ }
+</code></pre>
+
+
+<p><a name="Ouputs_table"></a></p>
+<h2>Ouputs table</h2>
+
+<p>The <strong>Outputs</strong> table is returned by the <strong>outputs_info()</strong> method and contains the
+<strong>Outputs</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<ul>
+    <li>If a specific output is given as parameter, only the nested table with the matching output ID is returned</li>
+    <li>The <strong>outputs_action()</strong> methods (<strong>outputs_on()</strong> etc.) return the complete outputs table</li>
+</ul>
+
+<p> <strong>Example:</strong></p>
+
+<pre><code> {
+   {
+     Action = 6,
+     Current = 0,
+     Delay = 5000,
+     Energy = 0,
+     ID = 1,
+     Load = 0,
+     Name = "output_1",
+     PowerFactor = 0,
+     State = 1
+   }, {
+     Action = 6,
+     Current = 0,
+     Delay = 5000,
+     Energy = 0,
+     ID = 2,
+     Load = 0,
+     Name = "output_2",
+     PowerFactor = 0,
+     State = 1
+   }, {
+     Action = 6,
+     Current = 0,
+     Delay = 5000,
+     Energy = 2081,
+     ID = 3,
+     Load = 0,
+     Name = "output_3",
+     PowerFactor = 0,
+     State = 0
+   }, {
+     Action = 6,
+     Current = 0,
+     Delay = 5000,
+     Energy = 172,
+     ID = 4,
+     Load = 0,
+     Name = "output_4",
+     PowerFactor = 0,
+     State = 1
+   }
+ }
+</code></pre>
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2018-08-15 20:21:09 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-netio-api documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-netio-api</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Status_table">Status table </a></li>
+<li><a href="#Agent_table">Agent table </a></li>
+<li><a href="#GlobalMeasure_table">GlobalMeasure table </a></li>
+<li><a href="#Ouputs_table">Ouputs table </a></li>
+</ul>
+
+
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><strong>Returend data structures</strong></li>
+  <li><a href="../manual/errors.md.html">Errors</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../index.html">netio.jsonapi</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>Returend data structures</h1>
+
+<p><a name="Status_table"></a></p>
+<h2>Status table</h2>
+
+<p>The <strong>Status</strong> table is returned by the <strong>info()</strong> method and contains all
+informations which the API provides.</p>
+
+<p><strong>Example:</strong></p>
+
+
+<pre>
+{
+  Agent = {
+    DeviceName = <span class="string">"NETIO 4ALL Demo"</span>,
+    JSONVer = <span class="string">"2.1"</span>,
+    Model = <span class="string">"NETIO 4All"</span>,
+    NumOutputs = <span class="number">4</span>,
+    OemID = <span class="number">0</span>,
+    SerialNumber = <span class="string">"24:A4:2C:39:11:5A"</span>,
+    Time = <span class="string">"2018-08-15T18:44:28+01:00"</span>,
+    Uptime = <span class="number">490866</span>,
+    VendorID = <span class="number">0</span>,
+    Version = <span class="string">"3.1.0"</span>
+  },
+  GlobalMeasure = {
+    EnergyStart = <span class="string">"2018-01-19T13:30:26+00:00"</span>,
+    Frequency = <span class="number">50.1</span>,
+    OverallPowerFactor = <span class="number">0</span>,
+    TotalCurrent = <span class="number">0</span>,
+    TotalEnergy = <span class="number">2253</span>,
+    TotalLoad = <span class="number">0</span>,
+    Voltage = <span class="number">239.1</span>
+  },
+  Outputs = { {
+      Action = <span class="number">6</span>,
+      Current = <span class="number">0</span>,
+      Delay = <span class="number">5000</span>,
+      Energy = <span class="number">0</span>,
+      ID = <span class="number">1</span>,
+      Load = <span class="number">0</span>,
+      Name = <span class="string">"output_1"</span>,
+      PowerFactor = <span class="number">0</span>,
+      State = <span class="number">1</span>
+    }, {
+      Action = <span class="number">6</span>,
+      Current = <span class="number">0</span>,
+      Delay = <span class="number">5000</span>,
+      Energy = <span class="number">0</span>,
+      ID = <span class="number">2</span>,
+      Load = <span class="number">0</span>,
+      Name = <span class="string">"output_2"</span>,
+      PowerFactor = <span class="number">0</span>,
+      State = <span class="number">1</span>
+    }, {
+      Action = <span class="number">6</span>,
+      Current = <span class="number">0</span>,
+      Delay = <span class="number">5000</span>,
+      Energy = <span class="number">2081</span>,
+      ID = <span class="number">3</span>,
+      Load = <span class="number">0</span>,
+      Name = <span class="string">"output_3"</span>,
+      PowerFactor = <span class="number">0</span>,
+      State = <span class="number">0</span>
+    }, {
+      Action = <span class="number">6</span>,
+      Current = <span class="number">0</span>,
+      Delay = <span class="number">5000</span>,
+      Energy = <span class="number">172</span>,
+      ID = <span class="number">4</span>,
+      Load = <span class="number">0</span>,
+      Name = <span class="string">"output_4"</span>,
+      PowerFactor = <span class="number">0</span>,
+      State = <span class="number">1</span>
+    } }
+}
+</pre>
+
+
+<p><a name="Agent_table"></a></p>
+<h2>Agent table</h2>
+
+<p>The <strong>Agent</strong> table is returned by the <strong>general_info()</strong> method and contains the
+<strong>Agent</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<p><strong>Example:</strong></p>
+
+
+<pre>
+{
+    DeviceName = <span class="string">"NETIO 4ALL Demo"</span>,
+    JSONVer = <span class="string">"2.1"</span>,
+    Model = <span class="string">"NETIO 4All"</span>,
+    NumOutputs = <span class="number">4</span>,
+    OemID = <span class="number">0</span>,
+    SerialNumber = <span class="string">"24:A4:2C:39:11:5A"</span>,
+    Time = <span class="string">"2018-08-15T18:44:28+01:00"</span>,
+    Uptime = <span class="number">490866</span>,
+    VendorID = <span class="number">0</span>,
+    Version = <span class="string">"3.1.0"</span>
+}
+</pre>
+
+
+<p><a name="GlobalMeasure_table"></a></p>
+<h2>GlobalMeasure table</h2>
+
+<p>The <strong>GlobalMeasure</strong> table is returned by the <strong>measure_info()</strong> method and contains the
+<strong>GlobalMeasure</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<p><strong>Example:</strong></p>
+
+
+<pre>
+{
+  EnergyStart = <span class="string">"2018-01-19T13:30:26+00:00"</span>,
+  Frequency = <span class="number">50.1</span>,
+  OverallPowerFactor = <span class="number">0</span>,
+  TotalCurrent = <span class="number">0</span>,
+  TotalEnergy = <span class="number">2253</span>,
+  TotalLoad = <span class="number">0</span>,
+  Voltage = <span class="number">239.1</span>
+}
+</pre>
+
+
+<p><a name="Ouputs_table"></a></p>
+<h2>Ouputs table</h2>
+
+<p>The <strong>Outputs</strong> table is returned by the <strong>outputs_info()</strong> method and contains the
+<strong>Outputs</strong> part of the <a href="#Status_table"><strong>Status</strong> table</a>.</p>
+
+<ul>
+    <li>If a specific output is given as parameter, only the nested table with the matching output ID is returned</li>
+    <li>The <strong>outputs_action()</strong> methods (<strong>outputs_on()</strong> etc.) return the complete outputs table</li>
+</ul>
+
+<p> <strong>Example:</strong></p>
+
+
+<pre>
+{
+  {
+    Action = <span class="number">6</span>,
+    Current = <span class="number">0</span>,
+    Delay = <span class="number">5000</span>,
+    Energy = <span class="number">0</span>,
+    ID = <span class="number">1</span>,
+    Load = <span class="number">0</span>,
+    Name = <span class="string">"output_1"</span>,
+    PowerFactor = <span class="number">0</span>,
+    State = <span class="number">1</span>
+  }, {
+    Action = <span class="number">6</span>,
+    Current = <span class="number">0</span>,
+    Delay = <span class="number">5000</span>,
+    Energy = <span class="number">0</span>,
+    ID = <span class="number">2</span>,
+    Load = <span class="number">0</span>,
+    Name = <span class="string">"output_2"</span>,
+    PowerFactor = <span class="number">0</span>,
+    State = <span class="number">1</span>
+  }, {
+    Action = <span class="number">6</span>,
+    Current = <span class="number">0</span>,
+    Delay = <span class="number">5000</span>,
+    Energy = <span class="number">2081</span>,
+    ID = <span class="number">3</span>,
+    Load = <span class="number">0</span>,
+    Name = <span class="string">"output_3"</span>,
+    PowerFactor = <span class="number">0</span>,
+    State = <span class="number">0</span>
+  }, {
+    Action = <span class="number">6</span>,
+    Current = <span class="number">0</span>,
+    Delay = <span class="number">5000</span>,
+    Energy = <span class="number">172</span>,
+    ID = <span class="number">4</span>,
+    Load = <span class="number">0</span>,
+    Name = <span class="string">"output_4"</span>,
+    PowerFactor = <span class="number">0</span>,
+    State = <span class="number">1</span>
+  }
+}
+</pre>
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2018-08-16 10:09:37 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
