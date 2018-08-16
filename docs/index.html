@@ -29,8 +29,7 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Class_NetioJson">Class NetioJson </a></li>
-<li><a href="#Public_functions">Public functions </a></li>
+<li><a href="#Functions">Functions</a></li>
 </ul>
 
 
@@ -53,6 +52,20 @@
  - Implements <a href="https://www.netio-products.com/files/download/sw/version/JSON---description-of-NETIO-M2M-API-interface_1-2-0.pdf">Protocol version: JSON Version 2.0</a>(PDF)</p>
 <p>
 
+<pre>
+<span class="keyword">local</span> Netio = <span class="global">require</span>(<span class="string">'netio.jsonapi'</span>)
+<span class="keyword">local</span> netio1 = Netio.new({
+    url = <span class="string">'http://netio-4all.netio-products.com'</span>,
+    port = <span class="number">8080</span>,
+    user = <span class="string">'write'</span>,
+    pass = <span class="string">'demo'</span>
+  })
+<span class="keyword">local</span> output1 = netio1:outputs_info(<span class="number">1</span>)
+<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(output1) <span class="keyword">do</span>
+  <span class="global">print</span>(k, v)
+<span class="keyword">end</span>
+</pre>
+
 </p>
     <h3>Info:</h3>
     <ul>
@@ -62,56 +75,53 @@
     </ul>
 
 
-<h2><a href="#Class_NetioJson">Class NetioJson </a></h2>
+<h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:info">NetioJson:info ()</a></td>
-	<td class="summary">Get all status informations from the device</td>
+	<td class="name" nowrap><a href="#instance:info">instance:info ()</a></td>
+	<td class="summary">Get all status informations from the device (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:general_info">NetioJson:general_info ()</a></td>
+	<td class="name" nowrap><a href="#instance:general_info">instance:general_info ()</a></td>
 	<td class="summary">Get device informations
  like serial number, firmware version etc.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_info">NetioJson:outputs_info (id)</a></td>
+	<td class="name" nowrap><a href="#instance:outputs_info">instance:outputs_info (id)</a></td>
 	<td class="summary">Get output informations
- about a specific or all outputs</td>
+ about a specific or all outputs (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:measure_info">NetioJson:measure_info ()</a></td>
-	<td class="summary">Get gloabl metering informations
- like voltage, frequency etc.</td>
+	<td class="name" nowrap><a href="#instance:measure_info">instance:measure_info ()</a></td>
+	<td class="summary">Get global metering informations
+ like voltage, frequency et cetera (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_action">NetioJson:outputs_action (ids, action[, delay=5000])</a></td>
-	<td class="summary">Perform actions on output's</td>
+	<td class="name" nowrap><a href="#instance:outputs_action">instance:outputs_action (ids, action[, delay=5000])</a></td>
+	<td class="summary">Perform actions on output's (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_off">NetioJson:outputs_off (ids)</a></td>
-	<td class="summary">Switch outputs off</td>
+	<td class="name" nowrap><a href="#instance:outputs_off">instance:outputs_off (ids)</a></td>
+	<td class="summary">Switch outputs off (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_on">NetioJson:outputs_on (ids)</a></td>
-	<td class="summary">Switch outputs on</td>
+	<td class="name" nowrap><a href="#instance:outputs_on">instance:outputs_on (ids)</a></td>
+	<td class="summary">Switch outputs on (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_shortoff">NetioJson:outputs_shortoff (ids, delay)</a></td>
-	<td class="summary">Switch outputs off for a specific timeframe</td>
+	<td class="name" nowrap><a href="#instance:outputs_shortoff">instance:outputs_shortoff (ids, delay)</a></td>
+	<td class="summary">Switch outputs off for a specific timeframe (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_shorton">NetioJson:outputs_shorton (ids, delay)</a></td>
-	<td class="summary">Switch outputs on for a specific timeframe</td>
+	<td class="name" nowrap><a href="#instance:outputs_shorton">instance:outputs_shorton (ids, delay)</a></td>
+	<td class="summary">Switch outputs on for a specific timeframe (method)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#NetioJson:outputs_toggle">NetioJson:outputs_toggle (ids)</a></td>
-	<td class="summary">Invert the outputs state</td>
+	<td class="name" nowrap><a href="#instance:outputs_toggle">instance:outputs_toggle (ids)</a></td>
+	<td class="summary">Invert the outputs state (method)</td>
 	</tr>
-</table>
-<h2><a href="#Public_functions">Public functions </a></h2>
-<table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#json_api.new">json_api.new (opts)</a></td>
+	<td class="name" nowrap><a href="#new">new (opts)</a></td>
 	<td class="summary">Create new instance</td>
 	</tr>
 </table>
@@ -120,18 +130,15 @@
 <br/>
 
 
-    <h2 class="section-header has-description"><a name="Class_NetioJson"></a>Class NetioJson </h2>
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
 
-          <div class="section-description">
-          Methods to control the NETIO smart socket
-          </div>
     <dl class="function">
     <dt>
-    <a name = "NetioJson:info"></a>
-    <strong>NetioJson:info ()</strong>
+    <a name = "instance:info"></a>
+    <strong>instance:info ()</strong>
     </dt>
     <dd>
-    Get all status informations from the device
+    Get all status informations from the device (method)
 
 
 
@@ -154,12 +161,12 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:general_info"></a>
-    <strong>NetioJson:general_info ()</strong>
+    <a name = "instance:general_info"></a>
+    <strong>instance:general_info ()</strong>
     </dt>
     <dd>
     Get device informations
- like serial number, firmware version etc.
+ like serial number, firmware version etc.  (method)
 
 
 
@@ -182,18 +189,18 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_info"></a>
-    <strong>NetioJson:outputs_info (id)</strong>
+    <a name = "instance:outputs_info"></a>
+    <strong>instance:outputs_info (id)</strong>
     </dt>
     <dd>
     Get output informations
- about a specific or all outputs
+ about a specific or all outputs (method)
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">id</span>
-            <span class="types"><span class="type">number</span></span>
+            <span class="types"><span class="type">int</span></span>
          Output ID
         </li>
     </ul>
@@ -218,12 +225,12 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:measure_info"></a>
-    <strong>NetioJson:measure_info ()</strong>
+    <a name = "instance:measure_info"></a>
+    <strong>instance:measure_info ()</strong>
     </dt>
     <dd>
-    Get gloabl metering informations
- like voltage, frequency etc.  Only supported on model NETIO 4all
+    Get global metering informations
+ like voltage, frequency et cetera (method)
 
 
 
@@ -246,11 +253,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_action"></a>
-    <strong>NetioJson:outputs_action (ids, action[, delay=5000])</strong>
+    <a name = "instance:outputs_action"></a>
+    <strong>instance:outputs_action (ids, action[, delay=5000])</strong>
     </dt>
     <dd>
-    Perform actions on output's
+    Perform actions on output's (method)
 
 
     <h3>Parameters:</h3>
@@ -292,11 +299,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_off"></a>
-    <strong>NetioJson:outputs_off (ids)</strong>
+    <a name = "instance:outputs_off"></a>
+    <strong>instance:outputs_off (ids)</strong>
     </dt>
     <dd>
-    Switch outputs off
+    Switch outputs off (method)
 
 
     <h3>Parameters:</h3>
@@ -326,11 +333,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_on"></a>
-    <strong>NetioJson:outputs_on (ids)</strong>
+    <a name = "instance:outputs_on"></a>
+    <strong>instance:outputs_on (ids)</strong>
     </dt>
     <dd>
-    Switch outputs on
+    Switch outputs on (method)
 
 
     <h3>Parameters:</h3>
@@ -360,11 +367,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_shortoff"></a>
-    <strong>NetioJson:outputs_shortoff (ids, delay)</strong>
+    <a name = "instance:outputs_shortoff"></a>
+    <strong>instance:outputs_shortoff (ids, delay)</strong>
     </dt>
     <dd>
-    Switch outputs off for a specific timeframe
+    Switch outputs off for a specific timeframe (method)
 
 
     <h3>Parameters:</h3>
@@ -398,11 +405,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_shorton"></a>
-    <strong>NetioJson:outputs_shorton (ids, delay)</strong>
+    <a name = "instance:outputs_shorton"></a>
+    <strong>instance:outputs_shorton (ids, delay)</strong>
     </dt>
     <dd>
-    Switch outputs on for a specific timeframe
+    Switch outputs on for a specific timeframe (method)
 
 
     <h3>Parameters:</h3>
@@ -436,11 +443,11 @@
 
 </dd>
     <dt>
-    <a name = "NetioJson:outputs_toggle"></a>
-    <strong>NetioJson:outputs_toggle (ids)</strong>
+    <a name = "instance:outputs_toggle"></a>
+    <strong>instance:outputs_toggle (ids)</strong>
     </dt>
     <dd>
-    Invert the outputs state
+    Invert the outputs state (method)
 
 
     <h3>Parameters:</h3>
@@ -469,13 +476,9 @@
     </ul>
 
 </dd>
-</dl>
-    <h2 class="section-header "><a name="Public_functions"></a>Public functions </h2>
-
-    <dl class="function">
     <dt>
-    <a name = "json_api.new"></a>
-    <strong>json_api.new (opts)</strong>
+    <a name = "new"></a>
+    <strong>new (opts)</strong>
     </dt>
     <dd>
     Create new instance
@@ -534,7 +537,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2018-08-16 10:09:37 </i>
+<i style="float:right;">Last updated 2018-08-16 13:17:02 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
