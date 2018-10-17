@@ -2,8 +2,6 @@
 --
 -- @module netio.json
 
-package.path = package.path .. ';./src/?/init.lua;./src/?.lua'
-
 local Wcore = require('netio.web_core')
 local utils = require('netio.utils')
 local basic_auth = require('requests').HTTPBasicAuth

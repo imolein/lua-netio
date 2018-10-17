@@ -4,8 +4,6 @@
 --
 -- @module netio.url
 
-package.path = package.path .. ';./src/?/init.lua;./src/?.lua'
-
 local Wcore = require('netio.web_core')
 local utils = require('netio.utils')
 
