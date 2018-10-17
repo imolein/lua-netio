@@ -1,6 +1,4 @@
-package.path = package.path .. ';./?/init.lua'
-
-local inspect = require('inspect')
+package.path = package.path .. ';./?.lua'
 
 local Netio, n1, sleep
 
