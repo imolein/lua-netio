@@ -27,15 +27,14 @@
 <h1>lua-netio-api</h1>
 
 
-<h2>Contents</h2>
-<ul>
-<li><a href="#Functions">Functions</a></li>
-</ul>
 
 
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><strong>netio</strong></li>
+  <li><a href="modules/netio.html">netio</a></li>
+  <li><a href="modules/netio.json.html">netio.json</a></li>
+  <li><a href="modules/netio.url.html">netio.url</a></li>
+  <li><a href="modules/web_core.html">web_core</a></li>
 </ul>
 <h2>Manual</h2>
 <ul class="nowrap">
@@ -44,515 +43,64 @@
 </ul>
 <h2>Examples</h2>
 <ul class="nowrap">
-  <li><a href="examples/demo.lua.html">demo.lua</a></li>
+  <li><a href="examples/jsonapi-demo.lua.html">jsonapi-demo.lua</a></li>
+  <li><a href="examples/urlapi-demo.lua.html">urlapi-demo.lua</a></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>netio</code></h1>
-<p>Implements two of three available Web API's:</p>
 
-<ul>
-    <li><a href="https://www.netio-products.com/files/download/sw/version/JSON---description-of-NETIO-M2M-API-interface_1-2-0.pdf">Protocol version: JSON API Version 2.0</a>(PDF)</li>
-    <li><a href="https://www.netio-products.com/files/download/sw/version/URL-API---description-of-NETIO-M2M-API-interface---PDF_1-1-0.pdf">Protocol version: URL API Version 1.0</a>(PDF)</li>
-</ul>
+  <h2>Lua module to control NETIO smart sockets over their M2M API's</h2>
 
-
-<pre>
-<span class="keyword">local</span> Netio = <span class="global">require</span>(<span class="string">'netio'</span>)
-<span class="keyword">local</span> netio1 = Netio.new({
-    url = <span class="string">'http://netio-4all.netio-products.com'</span>,
-    port = <span class="number">8080</span>,
-    user = <span class="string">'write'</span>,
-    pass = <span class="string">'demo'</span>,
-    api = <span class="string">'json'</span>
-  })
-<span class="keyword">local</span> output1 = netio1:outputs_info(<span class="number">1</span>)
-<span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(output1) <span class="keyword">do</span>
-  <span class="global">print</span>(k, v)
-<span class="keyword">end</span>
-</pre>
-
-<p> The <strong>URL API</strong> is write-only, so you can't read informations about the outputs etc with it.</p>
-<p> You have to use the <strong>JSON API</strong> for that.</p>
-
-
-<h2><a href="#Functions">Functions</a></h2>
-<table class="function_list">
+<h2>Modules</h2>
+<table class="module_list">
 	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_action">instance:outputs_action (ids, action[, delay=5])</a></td>
-	<td class="summary">Perform actions on output's (<strong>JSON</strong>, <strong>URL</strong>)</td>
+		<td class="name"  nowrap><a href="modules/netio.html">netio</a></td>
+		<td class="summary">lua-netio is a library to control outputs of NETIO 4x smart power sockets from NETIO products a.s.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_off">instance:outputs_off (ids)</a></td>
-	<td class="summary">Switch outputs off (<strong>JSON</strong>, <strong>URL</strong>)</td>
+		<td class="name"  nowrap><a href="modules/netio.json.html">netio.json</a></td>
+		<td class="summary">Implements the JSON API: <a href="https://www.netio-products.com/files/download/sw/version/JSON---description-of-NETIO-M2M-API-interface_1-2-0.pdf">Protocol version: JSON API Version 2.0</a>(PDF)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_on">instance:outputs_on (ids)</a></td>
-	<td class="summary">Switch outputs on (<strong>JSON</strong>, <strong>URL</strong>)</td>
+		<td class="name"  nowrap><a href="modules/netio.url.html">netio.url</a></td>
+		<td class="summary">Implements the URL API: <a href="https://www.netio-products.com/files/download/sw/version/URL-API---description-of-NETIO-M2M-API-interface---PDF_1-1-0.pdf">Protocol version: URL API Version 1.0</a>(PDF)</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_shortoff">instance:outputs_shortoff (ids, delay)</a></td>
-	<td class="summary">Switch outputs off for a specific timeframe (<strong>JSON</strong>, <strong>URL</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_shorton">instance:outputs_shorton (ids, delay)</a></td>
-	<td class="summary">Switch outputs on for a specific timeframe (<strong>JSON</strong>, <strong>URL</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_toggle">instance:outputs_toggle (ids)</a></td>
-	<td class="summary">Invert the outputs state (<strong>JSON</strong>, <strong>URL</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:info">instance:info ()</a></td>
-	<td class="summary">Get all status informations from the device (<strong>JSON</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:general_info">instance:general_info ()</a></td>
-	<td class="summary">Get device informations
- like serial number, firmware version etc.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:outputs_info">instance:outputs_info ([id])</a></td>
-	<td class="summary">Get output informations
- about a specific or all outputs (<strong>JSON</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#instance:measure_info">instance:measure_info ()</a></td>
-	<td class="summary">Get global metering informations
- like voltage, frequency et cetera (<strong>JSON</strong>)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#new">new (opts)</a></td>
-	<td class="summary">Create new instance</td>
+		<td class="name"  nowrap><a href="modules/web_core.html">web_core</a></td>
+		<td class="summary">Some methods which are used in URL and JSON API</td>
 	</tr>
 </table>
-
-<br/>
-<br/>
-
-
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "instance:outputs_action"></a>
-    <strong>instance:outputs_action (ids, action[, delay=5])</strong>
-    </dt>
-    <dd>
-    Perform actions on output's (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         The output ID where you want to perform the action. If you want to perform the same action on multiple outputs, the ID's have to be in a table
-        </li>
-        <li><span class="parameter">action</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The action you want to perform (<strong>0</strong> or <strong>'off'</strong>, <strong>1</strong> or <strong>'on'</strong>, <strong>2</strong> or <strong>'soff'</strong>, <strong>3</strong> or <strong>'son'</strong>, <strong>4</strong> or <strong>'toggle'</strong>, <strong>5</strong> or <strong>'nochange'</strong>, <strong>6</strong> or <strong>'ignore'</strong>)
-        </li>
-        <li><span class="parameter">delay</span>
-            <span class="types"><span class="type">int</span></span>
-         Define delay for <strong>shorton</strong> and <strong>shortoff</strong> in seconds
-         (<em>default</em> 5)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="comment">-- possible usecases
-</span><span class="keyword">local</span> resp = output_action(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>) <span class="comment">-- Switch off output 1 for 2 seconds
-</span><span class="keyword">local</span> resp = output_action({<span class="number">1</span>, <span class="number">2</span>}, <span class="number">2</span>, <span class="number">2</span>) <span class="comment">-- Switch off output 1 and 2 for 2 seconds
-</span><span class="keyword">local</span> resp = output_action({ {id=<span class="number">1</span>, action=<span class="number">2</span>, delay=<span class="number">2</span>}, {id=<span class="number">2</span>, action=<span class="number">2</span>}, {id=<span class="number">3</span>, action=<span class="number">4</span>} }) <span class="comment">-- Switch off ouput 1 for 2 seconds and output 2 for 5 (default if no value is given) and toggle output 3</span></pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_off"></a>
-    <strong>instance:outputs_off (ids)</strong>
-    </dt>
-    <dd>
-    Switch outputs off (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         Output ID/ID's
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> resp = netio1:output_off(<span class="number">1</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_on"></a>
-    <strong>instance:outputs_on (ids)</strong>
-    </dt>
-    <dd>
-    Switch outputs on (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         Output ID/ID's
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> resp = netio1:output_on(<span class="number">1</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_shortoff"></a>
-    <strong>instance:outputs_shortoff (ids, delay)</strong>
-    </dt>
-    <dd>
-    Switch outputs off for a specific timeframe (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         Output ID/ID's
-        </li>
-        <li><span class="parameter">delay</span>
-            <span class="types"><span class="type">int</span></span>
-         Delay between off and on in seconds
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> resp = netio1:output_shortoff(<span class="number">1</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_shorton"></a>
-    <strong>instance:outputs_shorton (ids, delay)</strong>
-    </dt>
-    <dd>
-    Switch outputs on for a specific timeframe (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         Output ID/ID's
-        </li>
-        <li><span class="parameter">delay</span>
-            <span class="types"><span class="type">int</span></span>
-         Delay between on and off in seconds
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> resp = netio1:output_shorton(<span class="number">1</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_toggle"></a>
-    <strong>instance:outputs_toggle (ids)</strong>
-    </dt>
-    <dd>
-    Invert the outputs state (<strong>JSON</strong>, <strong>URL</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">ids</span>
-            <span class="types"><span class="type">int</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
-         Output ID/ID's
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a>, <span class="type">boolean</span> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a> (<strong>JSON</strong>) or <strong>true</strong> (<strong>URL</strong>)</li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> resp = netio1:output_toggle(<span class="number">1</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:info"></a>
-    <strong>instance:info ()</strong>
-    </dt>
-    <dd>
-    Get all status informations from the device (<strong>JSON</strong>)
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Status_table">Status table</a></li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> info = netio1:info()</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:general_info"></a>
-    <strong>instance:general_info ()</strong>
-    </dt>
-    <dd>
-    Get device informations
- like serial number, firmware version etc.  (<strong>JSON</strong>)
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Agent_table">Agent table</a></li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> info = netio1:general_info()</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:outputs_info"></a>
-    <strong>instance:outputs_info ([id])</strong>
-    </dt>
-    <dd>
-    Get output informations
- about a specific or all outputs (<strong>JSON</strong>)
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">id</span>
-            <span class="types"><span class="type">int</span></span>
-         Output ID
-         (<em>optional</em>)
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#Ouputs_table">Outputs table</a></li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> outputs = netio1:output_info()
-<span class="keyword">local</span> output1 = netio1:output_info(<span class="number">2</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "instance:measure_info"></a>
-    <strong>instance:measure_info ()</strong>
-    </dt>
-    <dd>
-    Get global metering informations
- like voltage, frequency et cetera (<strong>JSON</strong>)
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-        <li>
-           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <span class="type">nil</span></span>
-        <a href="../manual/dstructures.md.html#GlobalMeasure_table">GlobalMeasure table</a></li>
-        <li>
-           <span class="types"><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-        error message</li>
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> info = netio1:measure_info()</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "new"></a>
-    <strong>new (opts)</strong>
-    </dt>
-    <dd>
-    Create new instance
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">opts</span> options table with arguments
-        <ul>
-        <li><span class="parameter">url</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         URL of the netio you want to speak with
-        </li>
-        <li><span class="parameter">port</span>
-            <span class="types"><span class="type">int</span></span>
-         Additional port (can also be written directly into the URL)
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">user</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         Name of the user, who has the right to read and/or write to the API
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">pass</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The password of the user
-         (<em>optional</em>)
-        </li>
-        <li><span class="parameter">api</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         specify which API should be used (<strong>json</strong> or <strong>url</strong>)
-         (<em>default</em> 'url')
-        </li>
-        </li></ul>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">object</span></span>
-        Instance table
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example"><span class="keyword">local</span> Netio = <span class="global">require</span>(<span class="string">'netio'</span>)
-<span class="keyword">local</span> socket_url_api = Netio.new({
-    url = <span class="string">'http://netio.de'</span>,
-    pass = <span class="string">'demo'</span>
-  })
-<span class="keyword">local</span> socket_json_api = Netio.new({
-    url = <span class="string">'http://netio.de'</span>,
-    user = <span class="string">'demo'</span>,
-    pass = <span class="string">'demo'</span>,
-    api = <span class="string">'json'</span>
-  })</pre>
-    </ul>
-
-</dd>
-</dl>
-
+<h2>Manual</h2>
+<table class="module_list">
+	<tr>
+		<td class="name"  nowrap><a href="manual/dstructures.md.html">dstructures.md</a></td>
+		<td class="summary"></td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="manual/errors.md.html">errors.md</a></td>
+		<td class="summary"></td>
+	</tr>
+</table>
+<h2>Examples</h2>
+<table class="module_list">
+	<tr>
+		<td class="name"  nowrap><a href="examples/jsonapi-demo.lua.html">jsonapi-demo.lua</a></td>
+		<td class="summary"></td>
+	</tr>
+	<tr>
+		<td class="name"  nowrap><a href="examples/urlapi-demo.lua.html">urlapi-demo.lua</a></td>
+		<td class="summary"></td>
+	</tr>
+</table>
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2018-10-16 16:13:11 </i>
+<i style="float:right;">Last updated 2018-10-17 11:41:24 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
