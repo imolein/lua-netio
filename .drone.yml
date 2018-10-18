@@ -6,7 +6,7 @@ pipeline:
         - luarocks install busted
         - busted -o TAP spec/
 matrix:
-  LUA_VERSION:
+  LUA:
     - 5.1
     - 5.2
     - 5.3
