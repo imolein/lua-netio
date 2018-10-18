@@ -2,6 +2,7 @@ pipeline:
   build:
     image: imo/luarocks${LUA}:latest
     commands:
+        - luarocks install lua-cjson 2.1.0-1
         - luarocks install lua-requests
         - luarocks install busted
         - busted -o TAP spec/
