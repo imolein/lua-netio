@@ -1,6 +1,4 @@
-package.path = package.path .. ';./?/init.lua'
-
-local inspect = require('inspect')
+package.path = package.path .. ';./?.lua'
 
 local Netio, n1, sleep
 
@@ -33,7 +31,7 @@ describe('lua-netio module', function()
     end)
 
     after_each(function()
-      local resp = n1:outputs_on({ 1, 2, 3, 4 })
+      local _ = n1:outputs_on({ 1, 2, 3, 4 })
     end)
 
     teardown(function()
@@ -69,7 +67,7 @@ describe('lua-netio module', function()
 
     it('- measure_info API call', function()
       local info = n1:info()
-      
+
       if info.Agent.Model ~= 'NETIO 4ALL Demo' then
         assert.is_nil(n1:measure_info())
       else
@@ -152,8 +150,8 @@ describe('lua-netio module', function()
     end)
 
     it('- outputs_shorton API call with single id and 2s delay', function()
-      local response = n1:outputs_off(1)
-      response = n1:outputs_shorton(1, 2)
+      local _ = n1:outputs_off(1)
+      local response = n1:outputs_shorton(1, 2)
       local expected1 = 1
       local expected2 = 0
 
@@ -164,8 +162,8 @@ describe('lua-netio module', function()
     end)
 
     it('- outputs_shorton API call with multiple id\'s and 2s delay', function()
-      local response = n1:outputs_off({ 1, 2 })
-      response = n1:outputs_shorton({ 1, 2 }, 2)
+      local _ = n1:outputs_off({ 1, 2 })
+      local response = n1:outputs_shorton({ 1, 2 }, 2)
       local expected1 = 1
       local expected2 = 0
 
@@ -191,9 +189,9 @@ describe('lua-netio module', function()
     end)
 
     after_each(function()
-      local resp = n1:outputs_on({ 1, 2, 3, 4 })
+      local _ = n1:outputs_on({ 1, 2, 3, 4 })
     end)
-  
+
     teardown(function()
       n1 = nil
     end)
@@ -251,7 +249,7 @@ describe('lua-netio module', function()
     it('- outputs_shorton API call with single id and 2s delay', function()
       local response = n1:outputs_off(1)
       assert.is_true(response)
-      
+
       response = n1:outputs_shorton(1, 2)
       assert.is_true(response)
       sleep(2)
@@ -260,7 +258,7 @@ describe('lua-netio module', function()
     it('- outputs_shorton API call with multiple id\'s and 2s delay', function()
       local response = n1:outputs_off({ 1, 2 })
       assert.is_true(response)
-      
+
       response = n1:outputs_shorton({ 1, 2 }, 2)
       assert.is_true(response)
     end)
