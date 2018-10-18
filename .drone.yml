@@ -1,11 +1,20 @@
 pipeline:
-  build:
+  lint:
+    image: imo/luarocks${LUA}:latest
+    commands:
+        -- luarocks install luacheck
+        -- luacheck src/ spec/
+
+  test:
     image: imo/luarocks${LUA}:latest
     commands:
         - luarocks install lua-cjson 2.1.0-1
         - luarocks install lua-requests
         - luarocks install busted
         - busted -o TAP spec/
+    when:
+        status: success
+
 matrix:
   LUA:
     - 5.1
