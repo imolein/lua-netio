@@ -31,7 +31,7 @@ local netio1 = Netio.new({
 local resp, err = netio1:outputs_info(1)
 print('Current state of Output1 is ' .. resp.State)
 resp, err = netio1:outputs_toggle(1)
-print('State after toggle of Output1 is ' .. resp.State)
+print('State after toggle of Output1 is ' .. resp[1].State)
 ```
 
 ## Documentation
