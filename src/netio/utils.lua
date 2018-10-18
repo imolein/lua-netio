@@ -12,7 +12,7 @@ local ERROR_STATES = {
 }
 
 -- used to translate actions if they are given as string
-local ACTIONS = { 
+local ACTIONS = {
   off = 0, on = 1, soff = 2, son = 3,
   toggle = 4, nochange = 5, ignore = 6
 }

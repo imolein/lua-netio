@@ -1,4 +1,4 @@
---- Implements the JSON API: [Protocol version: JSON API Version 2.0](https://www.netio-products.com/files/download/sw/version/JSON---description-of-NETIO-M2M-API-interface_1-2-0.pdf)(PDF)
+--- Implements the JSON API: [Protocol version: JSON API Version 2.0](https://www.netio-products.com/files/NETIO-M2M-API-Protocol-JSON.pdf)(PDF)
 --
 -- @module netio.json
 
@@ -83,9 +83,9 @@ end
 --   })
 function jsonapi.new(opts)
   assert(opts.url, 'URL required!')
-  
+
   local api = 'json'
-  
+
   local auth
   if opts.user and opts.pass then
     auth = basic_auth(opts.user, opts.pass)
