@@ -2,8 +2,8 @@ pipeline:
   lint:
     image: imo/luarocks${LUA}:latest
     commands:
-        -- luarocks install luacheck
-        -- luacheck src/ spec/
+        - luarocks install luacheck
+        - luacheck src/ spec/
 
   test:
     image: imo/luarocks${LUA}:latest
